@@ -2,12 +2,12 @@
 """
 钉钉自动采集器
 
-输入闺蜜姓名，自动：
+输入分身姓名，自动：
   1. 搜索钉钉用户，获取 userId
   2. 搜索他创建/编辑的文档和知识库内容
   3. 拉取多维表格（如有）
   4. 消息记录（API 不支持历史拉取，自动切换浏览器方案）
-  5. 输出统一格式，直接进 create-bestie 分析流程
+  5. 输出统一格式，直接进 create-digital-self 分析流程
 
 钉钉限制说明：
   钉钉 Open API 不提供历史消息拉取接口，
@@ -42,7 +42,7 @@ except ImportError:
     sys.exit(1)
 
 
-CONFIG_PATH = Path.home() / ".bestie-skill" / "dingtalk_config.json"
+CONFIG_PATH = Path.home() / ".digital-self-skill" / "dingtalk_config.json"
 API_BASE = "https://api.dingtalk.com"
 
 
@@ -751,7 +751,7 @@ def collect_all(
 def main() -> None:
     parser = argparse.ArgumentParser(description="钉钉数据自动采集器")
     parser.add_argument("--setup", action="store_true", help="初始化配置")
-    parser.add_argument("--name", help="闺蜜姓名")
+    parser.add_argument("--name", help="分身姓名")
     parser.add_argument("--output-dir", default=None, help="输出目录")
     parser.add_argument("--msg-limit", type=int, default=500, help="最多采集消息条数（默认 500）")
     parser.add_argument("--doc-limit", type=int, default=20, help="最多采集文档篇数（默认 20）")

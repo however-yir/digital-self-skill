@@ -42,7 +42,7 @@ from pathlib import Path
 from typing import Optional
 
 
-CONFIG_PATH = Path.home() / ".bestie-skill" / "feishu_config.json"
+CONFIG_PATH = Path.home() / ".digital-self-skill" / "feishu_config.json"
 
 
 # ─── 配置管理 ────────────────────────────────────────────────────────────────

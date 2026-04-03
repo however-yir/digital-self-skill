@@ -8,13 +8,13 @@ Skill 文件写入器
 用法：
     python3 skill_writer.py --action create --slug zhangsan --meta meta.json \
         --work work_content.md --persona persona_content.md \
-        --base-dir ./besties
+        --base-dir ./selves
 
     python3 skill_writer.py --action update --slug zhangsan \
         --work-patch work_patch.md --persona-patch persona_patch.md \
-        --base-dir ./besties
+        --base-dir ./selves
 
-    python3 skill_writer.py --action list --base-dir ./besties
+    python3 skill_writer.py --action list --base-dir ./selves
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ from typing import Optional
 
 SKILL_MD_TEMPLATE = """\
 ---
-name: bestie_{slug}
+name: digital_self_{slug}
 description: {name}，{identity}
 user-invocable: true
 ---
@@ -91,7 +91,7 @@ def slugify(name: str) -> str:
     # 清理：去掉连续下划线，首尾下划线
     import re
     slug = re.sub(r"_+", "_", slug).strip("_")
-    return slug if slug else "bestie"
+    return slug if slug else "digital-self"
 
 
 def build_identity_string(meta: dict) -> str:
@@ -110,7 +110,7 @@ def build_identity_string(meta: dict) -> str:
     if role:
         parts.append(role)
 
-    identity = " ".join(parts) if parts else "闺蜜"
+    identity = " ".join(parts) if parts else "分身"
 
     mbti = profile.get("mbti", "")
     if mbti:
@@ -126,7 +126,7 @@ def create_skill(
     work_content: str,
     persona_content: str,
 ) -> Path:
-    """创建新的闺蜜 Skill 目录结构"""
+    """创建新的分身 Skill 目录结构"""
 
     skill_dir = base_dir / slug
     skill_dir.mkdir(parents=True, exist_ok=True)
@@ -158,7 +158,7 @@ def create_skill(
 
     # 写入 work-only skill
     work_only = (
-        f"---\nname: bestie_{slug}_work\n"
+        f"---\nname: digital_self_{slug}_work\n"
         f"description: {name} 的工作能力（仅 Work，无 Persona）\n"
         f"user-invocable: true\n---\n\n{work_content}\n"
     )
@@ -166,7 +166,7 @@ def create_skill(
 
     # 写入 persona-only skill
     persona_only = (
-        f"---\nname: bestie_{slug}_persona\n"
+        f"---\nname: digital_self_{slug}_persona\n"
         f"description: {name} 的人物性格（仅 Persona，无工作能力）\n"
         f"user-invocable: true\n---\n\n{persona_content}\n"
     )
@@ -272,12 +272,12 @@ def update_skill(
     return new_version
 
 
-def list_besties(base_dir: Path) -> list:
-    """列出所有已创建的闺蜜 Skill"""
-    besties = []
+def list_selves(base_dir: Path) -> list:
+    """列出所有已创建的分身 Skill"""
+    selves = []
 
     if not base_dir.exists():
-        return besties
+        return selves
 
     for skill_dir in sorted(base_dir.iterdir()):
         if not skill_dir.is_dir():
@@ -291,7 +291,7 @@ def list_besties(base_dir: Path) -> list:
         except Exception:
             continue
 
-        besties.append({
+        selves.append({
             "slug": meta.get("slug", skill_dir.name),
             "name": meta.get("name", skill_dir.name),
             "identity": build_identity_string(meta),
@@ -300,14 +300,14 @@ def list_besties(base_dir: Path) -> list:
             "corrections_count": meta.get("corrections_count", 0),
         })
 
-    return besties
+    return selves
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Skill 文件写入器")
     parser.add_argument("--action", required=True, choices=["create", "update", "list"])
-    parser.add_argument("--slug", help="闺蜜 slug（用于目录名）")
-    parser.add_argument("--name", help="闺蜜姓名")
+    parser.add_argument("--slug", help="分身 slug（用于目录名）")
+    parser.add_argument("--name", help="分身姓名")
     parser.add_argument("--meta", help="meta.json 文件路径")
     parser.add_argument("--work", help="work.md 内容文件路径")
     parser.add_argument("--persona", help="persona.md 内容文件路径")
@@ -315,20 +315,20 @@ def main() -> None:
     parser.add_argument("--persona-patch", help="persona.md 增量更新内容文件路径")
     parser.add_argument(
         "--base-dir",
-        default="./besties",
-        help="闺蜜 Skill 根目录（默认：./besties）",
+        default="./selves",
+        help="分身 Skill 根目录（默认：./selves）",
     )
 
     args = parser.parse_args()
     base_dir = Path(args.base_dir).expanduser()
 
     if args.action == "list":
-        besties = list_besties(base_dir)
-        if not besties:
-            print("暂无已创建的闺蜜 Skill")
+        selves = list_selves(base_dir)
+        if not selves:
+            print("暂无已创建的分身 Skill")
         else:
-            print(f"已创建 {len(besties)} 个闺蜜 Skill：\n")
-            for c in besties:
+            print(f"已创建 {len(selves)} 个分身 Skill：\n")
+            for c in selves:
                 updated = c["updated_at"][:10] if c["updated_at"] else "未知"
                 print(f"  [{c['slug']}]  {c['name']} — {c['identity']}")
                 print(f"    版本: {c['version']}  纠正次数: {c['corrections_count']}  更新: {updated}")
@@ -345,7 +345,7 @@ def main() -> None:
         if args.name:
             meta["name"] = args.name
 
-        slug = args.slug or slugify(meta.get("name", "bestie"))
+        slug = args.slug or slugify(meta.get("name", "digital-self"))
 
         work_content = ""
         if args.work:

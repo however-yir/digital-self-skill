@@ -2,10 +2,10 @@
 """
 Slack 自动采集器
 
-输入闺蜜的 Slack 姓名/用户名，自动：
+输入分身的 Slack 姓名/用户名，自动：
   1. 搜索 Slack 用户，获取 user_id
   2. 找到与 Bot 共同的频道，拉取该用户发出的消息
-  3. 输出统一格式，直接进 create-bestie 分析流程
+  3. 输出统一格式，直接进 create-digital-self 分析流程
 
 前置：
   python3 slack_auto_collector.py --setup   # 配置 Bot Token（一次性）
@@ -54,7 +54,7 @@ except ImportError:
 
 # ─── 常量 ──────────────────────────────────────────────────────────────────────
 
-CONFIG_PATH = Path.home() / ".bestie-skill" / "slack_config.json"
+CONFIG_PATH = Path.home() / ".digital-self-skill" / "slack_config.json"
 
 # Slack 频道类型（采集范围）
 CHANNEL_TYPES = "public_channel,private_channel,mpim,im"
@@ -575,7 +575,7 @@ def collect_all(
     channel_limit: int,
     config: dict,
 ) -> dict:
-    """采集某闺蜜的所有 Slack 数据，输出到 output_dir"""
+    """采集某分身的所有 Slack 数据，输出到 output_dir"""
     output_dir.mkdir(parents=True, exist_ok=True)
     results: dict = {}
 
@@ -657,13 +657,13 @@ def main() -> None:
   # 首次配置
   python3 slack_auto_collector.py --setup
 
-  # 采集闺蜜数据
+  # 采集分身数据
   python3 slack_auto_collector.py --name "张三"
   python3 slack_auto_collector.py --name "john.doe" --output-dir ./knowledge/john --msg-limit 500
         """,
     )
     parser.add_argument("--setup", action="store_true", help="初始化配置（Bot Token）")
-    parser.add_argument("--name", help="闺蜜姓名或 Slack 用户名")
+    parser.add_argument("--name", help="分身姓名或 Slack 用户名")
     parser.add_argument(
         "--output-dir",
         default=None,

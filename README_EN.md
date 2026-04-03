@@ -1,6 +1,6 @@
 <div align="center">
 
-# bestie.skill
+# digital-self.skill
 
 > *"You AI guys are traitors to the codebase — you've already killed frontend, now you're coming for backend, QA, ops, infosec, chip design, and eventually yourselves and all of humanity"*
 
@@ -36,8 +36,8 @@ and get an **AI Skill that actually works like them**
 This project is adapted from [titanwings/colleague-skill](https://github.com/titanwings/colleague-skill) under the **MIT License**.
 
 - Original LICENSE is preserved
-- Scenario renamed from "colleague" to "bestie"
-- Commands and folders renamed accordingly (for example `create-bestie`, `besties/`)
+- Scenario renamed from "colleague" to "digital-self"
+- Commands and folders renamed accordingly (for example `create-digital-self`, `selves/`)
 
 See [NOTICE](NOTICE) for attribution details.
 
@@ -53,7 +53,7 @@ See [NOTICE](NOTICE) for attribution details.
 > - **MBTI 16 types + cognitive functions**, Enneagram, attachment styles
 > - All gender identities and relationship types supported
 >
-> Bestie left? Use **bestie.skill**. Ex left? Use **[ex.skill](https://github.com/titanwings/ex-skill)**. Cyber-immortality, end to end 🌟🌟🌟
+> Want to preserve your own working style as an AI collaborator? Use **digital-self.skill**.
 >
 > If you find this interesting, give both projects a Star!
 
@@ -61,7 +61,7 @@ See [NOTICE](NOTICE) for attribution details.
 
 ## Supported Data Sources
 
-> This is still a beta version of bestie.skill — more sources coming soon, stay tuned!
+> This is still a beta version of digital-self.skill — more sources coming soon, stay tuned!
 
 | Source | Messages | Docs / Wiki | Spreadsheets | Notes |
 |--------|:--------:|:-----------:|:------------:|-------|
@@ -99,16 +99,16 @@ These are independent open-source projects — this project does not include the
 ```bash
 # Install to current project (run at git repo root)
 mkdir -p .claude/skills
-git clone https://github.com/however-yir/bestie-skill .claude/skills/create-bestie
+git clone https://github.com/however-yir/digital-self-skill .claude/skills/create-digital-self
 
 # Or install globally (available in all projects)
-git clone https://github.com/however-yir/bestie-skill ~/.claude/skills/create-bestie
+git clone https://github.com/however-yir/digital-self-skill ~/.claude/skills/create-digital-self
 ```
 
 ### OpenClaw
 
 ```bash
-git clone https://github.com/however-yir/bestie-skill ~/.openclaw/workspace/skills/create-bestie
+git clone https://github.com/however-yir/digital-self-skill ~/.openclaw/workspace/skills/create-digital-self
 ```
 
 ### Dependencies (optional)
@@ -126,23 +126,23 @@ pip3 install -r requirements.txt
 In Claude Code, type:
 
 ```
-/create-bestie
+/create-digital-self
 ```
 
 Follow the prompts: enter an alias, company/level (e.g. `ByteDance L2-1 backend engineer`), personality tags, then choose a data source. All fields can be skipped — even a description alone can generate a Skill.
 
-Once created, invoke the bestie Skill with `/{slug}`.
+Once created, invoke the digital self Skill with `/{slug}`.
 
 ### Commands
 
 | Command | Description |
 |---------|-------------|
-| `/list-besties` | List all bestie Skills |
+| `/list-digital-selves` | List all digital self Skills |
 | `/{slug}` | Invoke full Skill (Persona + Work) |
 | `/{slug}-work` | Work capabilities only |
 | `/{slug}-persona` | Persona only |
-| `/bestie-rollback {slug} {version}` | Rollback to a previous version |
-| `/delete-bestie {slug}` | Delete |
+| `/digital-self-rollback {slug} {version}` | Rollback to a previous version |
+| `/delete-digital-self {slug}` | Delete |
 
 ---
 
@@ -155,7 +155,7 @@ Once created, invoke the bestie Skill with `/{slug}`.
 ```
 User            ❯ Can you review this API design?
 
-bestie.skill ❯ Hold on — what's the impact? You haven't explained the context.
+digital-self.skill ❯ Hold on — what's the impact? You haven't explained the context.
                   (after reading) N+1 query, fix it. Use the standard
                   {code, message, data} response format. That's the spec,
                   don't ask why.
@@ -166,7 +166,7 @@ bestie.skill ❯ Hold on — what's the impact? You haven't explained the contex
 ```
 User            ❯ This bug was introduced by you, right?
 
-bestie.skill ❯ Does the timeline match? That feature touched multiple places,
+digital-self.skill ❯ Does the timeline match? That feature touched multiple places,
                   there were other changes too.
 ```
 
@@ -176,7 +176,7 @@ bestie.skill ❯ Does the timeline match? That feature touched multiple places,
 
 ### Generated Skill Structure
 
-Each bestie Skill has two parts that work together:
+Each digital self Skill has two parts that work together:
 
 | Part | Content |
 |------|---------|
@@ -206,7 +206,7 @@ Execution: `Receive task → Persona decides attitude → Work Skill executes �
 This project follows the [AgentSkills](https://agentskills.io) open standard. The entire repo is a skill directory:
 
 ```
-create-bestie/
+create-digital-self/
 ├── SKILL.md              # Skill entry point (official frontmatter)
 ├── prompts/              # Prompt templates
 │   ├── intake.md         #   Dialogue-based info collection
@@ -225,7 +225,7 @@ create-bestie/
 │   ├── email_parser.py           # Email parser
 │   ├── skill_writer.py           # Skill file management
 │   └── version_manager.py        # Version archive & rollback
-├── besties/           # Generated bestie Skills (gitignored)
+├── selves/           # Generated digital self Skills (gitignored)
 ├── docs/PRD.md
 ├── requirements.txt
 └── LICENSE
@@ -244,11 +244,11 @@ create-bestie/
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=however-yir%2Fbestie-skill&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=however-yir%2Fdigital-self-skill&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=however-yir/bestie-skill&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=however-yir/bestie-skill&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=however-yir/bestie-skill&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=however-yir/digital-self-skill&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=however-yir/digital-self-skill&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=however-yir/digital-self-skill&type=date&legend=top-left" />
  </picture>
 </a>
 

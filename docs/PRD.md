@@ -1,16 +1,16 @@
-# 闺蜜.skill —— 产品需求文档 v2.0
+# 分身.skill —— 产品需求文档 v2.0
 
 ---
 
 ## 一、产品概述
 
-**闺蜜.skill** 是一个运行在 OpenClaw 上的 meta-skill。
+**分身.skill** 是一个运行在 OpenClaw 上的 meta-skill。
 
-用户通过对话式交互提供原材料（文件 + 手动描述），系统自动生成一个可独立运行的**闺蜜 Persona Skill**。
+用户通过对话式交互提供原材料（文件 + 手动描述），系统自动生成一个可独立运行的**分身 Persona Skill**。
 
 生成的 Skill 由两个独立部分组成：
-- **Part A — Work Skill**：该闺蜜的技术能力与工作方法，能实际完成工作任务
-- **Part B — Persona**：该闺蜜的性格、沟通风格、行为模式
+- **Part A — Work Skill**：该分身的技术能力与工作方法，能实际完成工作任务
+- **Part B — Persona**：该分身的性格、沟通风格、行为模式
 
 两部分可以独立使用，也可以组合运行（默认组合）。生成后的 Skill 支持通过追加文件或对话纠正持续进化。
 
@@ -19,7 +19,7 @@
 ## 二、用户流程
 
 ```
-用户触发 /create-bestie
+用户触发 /create-digital-self
         ↓
 [Step 1] 基础信息录入（全部可跳过）
   - 姓名/代号
@@ -47,7 +47,7 @@
   - 用户可直接确认或修改
         ↓
 [Step 5] 写入文件，立即可用
-  - 生成 ~/.openclaw/workspace/skills/besties/{slug}/
+  - 生成 ~/.openclaw/workspace/skills/selves/{slug}/
   - 包含 SKILL.md（完整组合版）
   - 包含 work.md 和 persona.md（独立部分）
         ↓
@@ -64,7 +64,7 @@
 ### 3.1 基础信息字段
 
 ```yaml
-name:        闺蜜姓名/代号               # 必填，用于生成 slug 和称谓
+name:        分身姓名/代号               # 必填，用于生成 slug 和称谓
 company:     公司名称                    # 可选，如：阿里 / 字节 / 腾讯 / 百度 / 美团
 level:       职级                       # 可选，如：P7 / 3-1 / T3-2 / L6 / 高级
 role:        职位名称                   # 可选，如：算法工程师 / 产品经理 / 前端工程师
@@ -137,7 +137,7 @@ impression:  ""                        # 可选，自由文本，你对他的主
 
 ### 5.1 Part A — Work Skill（工作能力部分）
 
-从文件中提取该闺蜜的**实际工作方法和技术能力**，使生成的 Skill 能真正完成工作任务。
+从文件中提取该分身的**实际工作方法和技术能力**，使生成的 Skill 能真正完成工作任务。
 
 **提取维度：**
 
@@ -172,7 +172,7 @@ impression:  ""                        # 可选，自由文本，你对他的主
 
 ### 5.2 Part B — Persona（人物性格部分）
 
-从文件 + 手动标签共同构建该闺蜜的**行为模式和沟通风格**。
+从文件 + 手动标签共同构建该分身的**行为模式和沟通风格**。
 
 **分层结构（优先级从高到低）：**
 
@@ -262,7 +262,7 @@ Layer 5 — Correction 层（对话纠正追加，滚动更新）
 ### 6.3 版本管理
 
 - 每次更新自动存档当前版本到 `versions/`
-- 支持 `/bestie-rollback {slug} {version}` 回滚
+- 支持 `/digital-self-rollback {slug} {version}` 回滚
 - 保留最近 10 个版本
 
 ---
@@ -272,11 +272,11 @@ Layer 5 — Correction 层（对话纠正追加，滚动更新）
 ```
 ~/.openclaw/workspace/skills/
 │
-├── create-bestie/                    # meta-skill：闺蜜skill创建器
+├── create-digital-self/                    # meta-skill：分身skill创建器
 │   │
 │   ├── SKILL.md                          # 主入口
-│   │                                     # 触发词: /create-bestie
-│   │                                     # 描述: 创建一个闺蜜的 Persona + Work Skill
+│   │                                     # 触发词: /create-digital-self
+│   │                                     # 描述: 创建一个分身的 Persona + Work Skill
 │   │
 │   ├── prompts/                          # Prompt 模板（不执行，供 SKILL.md 引用）
 │   │   ├── intake.md                     # 引导用户录入基础信息的对话脚本
@@ -289,22 +289,22 @@ Layer 5 — Correction 层（对话纠正追加，滚动更新）
 │   │
 │   └── tools/                            # 工具脚本
 │       ├── feishu_parser.py              # 解析飞书消息导出 JSON
-│       ├── email_parser.py               # 解析 .eml 邮件，提取发件人为目标闺蜜的内容
+│       ├── email_parser.py               # 解析 .eml 邮件，提取发件人为目标分身的内容
 │       ├── skill_writer.py               # 写入/更新生成的 Skill 文件
 │       └── version_manager.py            # 版本存档与回滚
 │
-└── besties/                           # 生成的闺蜜 Skills 存放处
+└── selves/                           # 生成的分身 Skills 存放处
     │
-    └── {bestie_slug}/                 # 每个闺蜜一个目录，slug = 姓名拼音或自定义
+    └── {digital_self_slug}/                 # 每个分身一个目录，slug = 姓名拼音或自定义
         │
         ├── SKILL.md                      # 完整组合版，可直接运行
-        │                                 # 触发词: /{bestie_slug}
+        │                                 # 触发词: /{digital_self_slug}
         │
         ├── work.md                       # Part A：工作能力（可独立运行）
-        │                                 # 触发词: /{bestie_slug}-work
+        │                                 # 触发词: /{digital_self_slug}-work
         │
         ├── persona.md                    # Part B：人物性格（可独立运行）
-        │                                 # 触发词: /{bestie_slug}-persona
+        │                                 # 触发词: /{digital_self_slug}-persona
         │
         ├── meta.json                     # 元数据
         │                                 # 包含：创建时间、版本号、原材料清单、
@@ -330,7 +330,7 @@ Layer 5 — Correction 层（对话纠正追加，滚动更新）
 
 ## 八、关键文件格式
 
-### `besties/{slug}/meta.json`
+### `selves/{slug}/meta.json`
 
 ```json
 {
@@ -360,11 +360,11 @@ Layer 5 — Correction 层（对话纠正追加，滚动更新）
 }
 ```
 
-### `besties/{slug}/SKILL.md` 结构
+### `selves/{slug}/SKILL.md` 结构
 
 ```markdown
 ---
-name: bestie_{slug}
+name: digital_self_{slug}
 description: {name}，{company} {level} {role}
 user-invocable: true
 ---
@@ -400,7 +400,7 @@ user-invocable: true
 ## 九、实现优先级
 
 ### P0 — MVP（先跑通主流程）
-- [ ] `create-bestie/SKILL.md` 主流程
+- [ ] `create-digital-self/SKILL.md` 主流程
 - [ ] `prompts/intake.md` 基础信息录入
 - [ ] `prompts/work_analyzer.md` + `work_builder.md`
 - [ ] `prompts/persona_analyzer.md` + `persona_builder.md`
@@ -418,9 +418,9 @@ user-invocable: true
 - [ ] `tools/version_manager.py` 版本管理
 
 ### P3 — 管理功能
-- [ ] `/list-besties` 列出所有闺蜜 Skill
-- [ ] `/bestie-rollback {slug} {version}` 回滚
-- [ ] `/delete-bestie {slug}` 删除
+- [ ] `/list-digital-selves` 列出所有分身 Skill
+- [ ] `/digital-self-rollback {slug} {version}` 回滚
+- [ ] `/delete-digital-self {slug}` 删除
 - [ ] Word/Excel 转换提示与引导
 
 ---

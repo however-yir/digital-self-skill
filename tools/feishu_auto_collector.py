@@ -2,13 +2,13 @@
 """
 飞书自动采集器
 
-输入闺蜜姓名，自动：
+输入分身姓名，自动：
   1. 搜索飞书用户，获取 user_id
   2. 找到与他共同的群聊，拉取他的消息记录
   3. 搜索他创建/编辑的文档和 Wiki
   4. 拉取文档内容
   5. 拉取多维表格（如有）
-  6. 输出统一格式，直接进 create-bestie 分析流程
+  6. 输出统一格式，直接进 create-digital-self 分析流程
 
 前置：
   python3 feishu_auto_collector.py --setup   # 配置 App ID / Secret（一次性）
@@ -35,7 +35,7 @@ except ImportError:
     sys.exit(1)
 
 
-CONFIG_PATH = Path.home() / ".bestie-skill" / "feishu_config.json"
+CONFIG_PATH = Path.home() / ".digital-self-skill" / "feishu_config.json"
 BASE_URL = "https://open.feishu.cn/open-apis"
 
 
@@ -649,7 +649,7 @@ def collect_all(
     doc_limit: int,
     config: dict,
 ) -> dict:
-    """采集某闺蜜的所有可用数据，输出到 output_dir"""
+    """采集某分身的所有可用数据，输出到 output_dir"""
     output_dir.mkdir(parents=True, exist_ok=True)
     results = {}
 
@@ -703,7 +703,7 @@ def collect_all(
 def main() -> None:
     parser = argparse.ArgumentParser(description="飞书数据自动采集器")
     parser.add_argument("--setup", action="store_true", help="初始化配置")
-    parser.add_argument("--name", help="闺蜜姓名")
+    parser.add_argument("--name", help="分身姓名")
     parser.add_argument("--output-dir", default=None, help="输出目录（默认 ./knowledge/{name}）")
     parser.add_argument("--msg-limit", type=int, default=1000, help="最多采集消息条数（默认 1000）")
     parser.add_argument("--doc-limit", type=int, default=20, help="最多采集文档篇数（默认 20）")

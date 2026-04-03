@@ -1,7 +1,7 @@
 ---
-name: create-bestie
-description: "Distill a bestie into an AI Skill. Auto-collect Feishu/DingTalk data, generate Work Skill + Persona, with continuous evolution. | 把闺蜜蒸馏成 AI Skill，自动采集飞书/钉钉数据，生成 Work + Persona，支持持续进化。"
-argument-hint: "[bestie-name-or-slug]"
+name: create-digital-self
+description: "Distill a digital self into an AI Skill. Auto-collect Feishu/DingTalk data, generate Work Skill + Persona, with continuous evolution. | 把分身蒸馏成 AI Skill，自动采集飞书/钉钉数据，生成 Work + Persona，支持持续进化。"
+argument-hint: "[name-or-slug]"
 version: "1.0.0"
 user-invocable: true
 allowed-tools: Read, Write, Edit, Bash
@@ -11,23 +11,23 @@ allowed-tools: Read, Write, Edit, Bash
 >
 > 本 Skill 支持中英文。根据用户第一条消息的语言，全程使用同一语言回复。下方提供了两种语言的指令，按用户语言选择对应版本执行。
 
-# 闺蜜.skill 创建器（Claude Code 版）
+# 分身.skill 创建器（Claude Code 版）
 
 ## 触发条件
 
 当用户说以下任意内容时启动：
-- `/create-bestie`
-- "帮我创建一个闺蜜 skill"
-- "我想蒸馏一个闺蜜"
-- "新建闺蜜"
+- `/create-digital-self`
+- "帮我创建一个分身 skill"
+- "我想蒸馏一个分身"
+- "新建分身"
 - "给我做一个 XX 的 skill"
 
-当用户对已有闺蜜 Skill 说以下内容时，进入进化模式：
+当用户对已有分身 Skill 说以下内容时，进入进化模式：
 - "我有新文件" / "追加"
 - "这不对" / "他不会这样" / "他应该是"
-- `/update-bestie {slug}`
+- `/update-digital-self {slug}`
 
-当用户说 `/list-besties` 时列出所有已生成的闺蜜。
+当用户说 `/list-digital-selves` 时列出所有已生成的分身。
 
 ---
 
@@ -50,12 +50,12 @@ allowed-tools: Read, Write, Edit, Bash
 | 版本管理 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py` |
 | 列出已有 Skill | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/skill_writer.py --action list` |
 
-**基础目录**：Skill 文件写入 `./besties/{slug}/`（相对于本项目目录）。
-如需改为全局路径，用 `--base-dir ~/.openclaw/workspace/skills/besties`。
+**基础目录**：Skill 文件写入 `./selves/{slug}/`（相对于本项目目录）。
+如需改为全局路径，用 `--base-dir ~/.openclaw/workspace/skills/selves`。
 
 ---
 
-## 主流程：创建新闺蜜 Skill
+## 主流程：创建新分身 Skill
 
 ### Step 1：基础信息录入（3 个问题）
 
@@ -286,20 +286,20 @@ Persona 摘要：
 
 **1. 创建目录结构**（用 Bash）：
 ```bash
-mkdir -p besties/{slug}/versions
-mkdir -p besties/{slug}/knowledge/docs
-mkdir -p besties/{slug}/knowledge/messages
-mkdir -p besties/{slug}/knowledge/emails
+mkdir -p selves/{slug}/versions
+mkdir -p selves/{slug}/knowledge/docs
+mkdir -p selves/{slug}/knowledge/messages
+mkdir -p selves/{slug}/knowledge/emails
 ```
 
 **2. 写入 work.md**（用 Write 工具）：
-路径：`besties/{slug}/work.md`
+路径：`selves/{slug}/work.md`
 
 **3. 写入 persona.md**（用 Write 工具）：
-路径：`besties/{slug}/persona.md`
+路径：`selves/{slug}/persona.md`
 
 **4. 写入 meta.json**（用 Write 工具）：
-路径：`besties/{slug}/meta.json`
+路径：`selves/{slug}/meta.json`
 内容：
 ```json
 {
@@ -326,12 +326,12 @@ mkdir -p besties/{slug}/knowledge/emails
 ```
 
 **5. 生成完整 SKILL.md**（用 Write 工具）：
-路径：`besties/{slug}/SKILL.md`
+路径：`selves/{slug}/SKILL.md`
 
 SKILL.md 结构：
 ```markdown
 ---
-name: bestie-{slug}
+name: digital-self-{slug}
 description: {name}，{company} {level} {role}
 user-invocable: true
 ---
@@ -364,9 +364,9 @@ user-invocable: true
 
 告知用户：
 ```
-✅ 闺蜜 Skill 已创建！
+✅ 分身 Skill 已创建！
 
-文件位置：besties/{slug}/
+文件位置：selves/{slug}/
 触发词：/{slug}（完整版）
         /{slug}-work（仅工作能力）
         /{slug}-persona（仅人物性格）
@@ -381,11 +381,11 @@ user-invocable: true
 用户提供新文件或文本时：
 
 1. 按 Step 2 的方式读取新内容
-2. 用 `Read` 读取现有 `besties/{slug}/work.md` 和 `persona.md`
+2. 用 `Read` 读取现有 `selves/{slug}/work.md` 和 `persona.md`
 3. 参考 `${CLAUDE_SKILL_DIR}/prompts/merger.md` 分析增量内容
 4. 存档当前版本（用 Bash）：
    ```bash
-   python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py --action backup --slug {slug} --base-dir ./besties
+   python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py --action backup --slug {slug} --base-dir ./selves
    ```
 5. 用 `Edit` 工具追加增量内容到对应文件
 6. 重新生成 `SKILL.md`（合并最新 work.md + persona.md）
@@ -407,20 +407,20 @@ user-invocable: true
 
 ## 管理命令
 
-`/list-besties`：
+`/list-digital-selves`：
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/tools/skill_writer.py --action list --base-dir ./besties
+python3 ${CLAUDE_SKILL_DIR}/tools/skill_writer.py --action list --base-dir ./selves
 ```
 
-`/bestie-rollback {slug} {version}`：
+`/digital-self-rollback {slug} {version}`：
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py --action rollback --slug {slug} --version {version} --base-dir ./besties
+python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py --action rollback --slug {slug} --version {version} --base-dir ./selves
 ```
 
-`/delete-bestie {slug}`：
+`/delete-digital-self {slug}`：
 确认后执行：
 ```bash
-rm -rf besties/{slug}
+rm -rf selves/{slug}
 ```
 
 ---
@@ -428,23 +428,23 @@ rm -rf besties/{slug}
 
 # English Version
 
-# Bestie.skill Creator (Claude Code Edition)
+# Digital-self.skill Creator (Claude Code Edition)
 
 ## Trigger Conditions
 
 Activate when the user says any of the following:
-- `/create-bestie`
-- "Help me create a bestie skill"
-- "I want to distill a bestie"
-- "New bestie"
+- `/create-digital-self`
+- "Help me create a digital self skill"
+- "I want to distill a digital self"
+- "New digital self"
 - "Make a skill for XX"
 
 Enter evolution mode when the user says:
 - "I have new files" / "append"
 - "That's wrong" / "He wouldn't do that" / "He should be"
-- `/update-bestie {slug}`
+- `/update-digital-self {slug}`
 
-List all generated besties when the user says `/list-besties`.
+List all generated selves when the user says `/list-digital-selves`.
 
 ---
 
@@ -467,12 +467,12 @@ This Skill runs in the Claude Code environment with the following tools:
 | Version management | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py` |
 | List existing Skills | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/skill_writer.py --action list` |
 
-**Base directory**: Skill files are written to `./besties/{slug}/` (relative to the project directory).
-For a global path, use `--base-dir ~/.openclaw/workspace/skills/besties`.
+**Base directory**: Skill files are written to `./selves/{slug}/` (relative to the project directory).
+For a global path, use `--base-dir ~/.openclaw/workspace/skills/selves`.
 
 ---
 
-## Main Flow: Create a New Bestie Skill
+## Main Flow: Create a New Digital Self Skill
 
 ### Step 1: Basic Info Collection (3 questions)
 
@@ -703,20 +703,20 @@ After user confirmation, execute the following:
 
 **1. Create directory structure** (Bash):
 ```bash
-mkdir -p besties/{slug}/versions
-mkdir -p besties/{slug}/knowledge/docs
-mkdir -p besties/{slug}/knowledge/messages
-mkdir -p besties/{slug}/knowledge/emails
+mkdir -p selves/{slug}/versions
+mkdir -p selves/{slug}/knowledge/docs
+mkdir -p selves/{slug}/knowledge/messages
+mkdir -p selves/{slug}/knowledge/emails
 ```
 
 **2. Write work.md** (Write tool):
-Path: `besties/{slug}/work.md`
+Path: `selves/{slug}/work.md`
 
 **3. Write persona.md** (Write tool):
-Path: `besties/{slug}/persona.md`
+Path: `selves/{slug}/persona.md`
 
 **4. Write meta.json** (Write tool):
-Path: `besties/{slug}/meta.json`
+Path: `selves/{slug}/meta.json`
 Content:
 ```json
 {
@@ -743,12 +743,12 @@ Content:
 ```
 
 **5. Generate full SKILL.md** (Write tool):
-Path: `besties/{slug}/SKILL.md`
+Path: `selves/{slug}/SKILL.md`
 
 SKILL.md structure:
 ```markdown
 ---
-name: bestie-{slug}
+name: digital-self-{slug}
 description: {name}, {company} {level} {role}
 user-invocable: true
 ---
@@ -781,9 +781,9 @@ user-invocable: true
 
 Inform user:
 ```
-✅ Bestie Skill created!
+✅ Digital self Skill created!
 
-Location: besties/{slug}/
+Location: selves/{slug}/
 Commands: /{slug} (full version)
           /{slug}-work (work capabilities only)
           /{slug}-persona (persona only)
@@ -798,11 +798,11 @@ If something feels off, just say "he wouldn't do that" and I'll update it.
 When user provides new files or text:
 
 1. Read new content using Step 2 methods
-2. `Read` existing `besties/{slug}/work.md` and `persona.md`
+2. `Read` existing `selves/{slug}/work.md` and `persona.md`
 3. Refer to `${CLAUDE_SKILL_DIR}/prompts/merger.md` for incremental analysis
 4. Archive current version (Bash):
    ```bash
-   python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py --action backup --slug {slug} --base-dir ./besties
+   python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py --action backup --slug {slug} --base-dir ./selves
    ```
 5. Use `Edit` tool to append incremental content to relevant files
 6. Regenerate `SKILL.md` (merge latest work.md + persona.md)
@@ -824,18 +824,18 @@ When user expresses "that's wrong" / "he should be":
 
 ## Management Commands
 
-`/list-besties`:
+`/list-digital-selves`:
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/tools/skill_writer.py --action list --base-dir ./besties
+python3 ${CLAUDE_SKILL_DIR}/tools/skill_writer.py --action list --base-dir ./selves
 ```
 
-`/bestie-rollback {slug} {version}`:
+`/digital-self-rollback {slug} {version}`:
 ```bash
-python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py --action rollback --slug {slug} --version {version} --base-dir ./besties
+python3 ${CLAUDE_SKILL_DIR}/tools/version_manager.py --action rollback --slug {slug} --version {version} --base-dir ./selves
 ```
 
-`/delete-bestie {slug}`:
+`/delete-digital-self {slug}`:
 After confirmation:
 ```bash
-rm -rf besties/{slug}
+rm -rf selves/{slug}
 ```

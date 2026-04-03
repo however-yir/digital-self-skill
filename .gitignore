@@ -1,7 +1,7 @@
-# Generated bestie skills (user data, not committed)
-besties/*
-!besties/example_mimi/
-!besties/example_mimi/**
+# Generated digital self skills (user data, not committed)
+selves/*
+!selves/example_mimi/
+!selves/example_mimi/**
 
 # Python
 __pycache__/
@@ -12,7 +12,7 @@ venv/
 *.egg-info/
 
 # Config with credentials
-~/.bestie-skill/
+~/.digital-self-skill/
 
 # Playwright browser data
 playwright-data/

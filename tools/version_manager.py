@@ -114,12 +114,12 @@ def cleanup_old_versions(skill_dir: Path, max_versions: int = MAX_VERSIONS):
 def main():
     parser = argparse.ArgumentParser(description="Skill 版本管理器")
     parser.add_argument("--action", required=True, choices=["list", "rollback", "cleanup"])
-    parser.add_argument("--slug", required=True, help="闺蜜 slug")
+    parser.add_argument("--slug", required=True, help="分身 slug")
     parser.add_argument("--version", help="目标版本号（rollback 时使用）")
     parser.add_argument(
         "--base-dir",
-        default="~/.openclaw/workspace/skills/besties",
-        help="闺蜜 Skill 根目录",
+        default="~/.openclaw/workspace/skills/selves",
+        help="分身 Skill 根目录",
     )
 
     args = parser.parse_args()

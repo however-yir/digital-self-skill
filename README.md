@@ -1,8 +1,8 @@
 <div align="center">
 
-# 闺蜜.skill
+# 分身.skill
 
-> *"你们搞大模型的就是码奸，你们已经害死前端兄弟了，还要害死后端兄弟，测试兄弟，运维兄弟，害死网安兄弟，害死ic兄弟，最后害死自己害死全人类"*
+> *"把你蒸馏成可调用的数字生命，让关键判断不再只存在于你的脑子里。"*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://python.org)
@@ -11,19 +11,18 @@
 
 <br>
 
-那个最懂你项目的人离开了，文档和上下文没人接住？<br>
-你配合最默契的搭子转岗后，很多隐性经验一下断层？<br>
-交接文档很短，但背后其实是几年积累和大量判断？<br>
-你希望保留 TA 的工作方法、表达风格和决策习惯？<br>
-想让 AI 在关键时刻继续“像 TA 一样”协作？<br>
+你的方法论只在你脑子里，团队无法复用？<br>
+你的表达风格和决策路径很强，但新人很难接住？<br>
+你想把自己的经验、习惯、判断标准沉淀成可调用能力？<br>
+你希望在高压场景里，AI 能够“像你一样”思考和回应？<br>
 
-**将冰冷的离别化为温暖的 Skill，欢迎加入赛博永生！**
+**把你自己做成一个可协作的数字生命分身。**
 
 <br>
 
-提供闺蜜的原材料（飞书消息、钉钉文档、邮件、截图）加上你的主观描述<br>
-生成一个**真正能替 TA 工作的 AI Skill**<br>
-用 TA 的技术规范写代码，用 TA 的语气回答问题，知道 TA 什么时候会甩锅
+提供你的原材料（聊天记录、文档、邮件、语音转写、截图）加上你的主观描述<br>
+生成一个**真正能按你的方式工作的 AI Skill**<br>
+用你的标准做决策，用你的语气表达结论，在关键场景保持你的风格一致性
 
 [数据来源](#支持的数据来源) · [安装](#安装) · [使用](#使用) · [效果示例](#效果示例) · [详细安装说明](INSTALL.md) · [**English**](README_EN.md)
 
@@ -36,8 +35,8 @@
 本项目基于 [titanwings/colleague-skill](https://github.com/titanwings/colleague-skill) 按 **MIT License** 改编。
 
 - 保留了原项目 LICENSE
-- 场景从“同事”重命名为“闺蜜”
-- 命令与目录同步改名（如 `create-bestie`、`besties/`）
+- 场景从“复刻他人”重构为“蒸馏自己”
+- 命令与目录采用“分身”语义（如 `create-digital-self`、`selves/`）
 
 详细来源说明见 [NOTICE](NOTICE)。
 
@@ -45,14 +44,14 @@
 
 ## 支持的数据来源
 
-> 目前还是闺蜜.skill 的 beta 测试版本，后续会有更多来源支持，请多多关注！
+> 当前为分身.skill 的 beta 版本，欢迎持续反馈你想接入的来源。
 
 | 来源 | 消息记录 | 文档 / Wiki | 多维表格 | 备注 |
 |------|:-------:|:-----------:|:-------:|------|
-| 飞书（自动采集） | ✅ API | ✅ | ✅ | 输入姓名即可，全自动 |
-| 钉钉（自动采集） | ⚠️ 浏览器 | ✅ | ✅ | 钉钉 API 不支持历史消息 |
+| 飞书（自动采集） | ✅ API | ✅ | ✅ | 输入姓名即可自动拉取 |
+| 钉钉（自动采集） | ⚠️ 浏览器 | ✅ | ✅ | 钉钉 API 不支持完整历史消息 |
 | Slack（自动采集） | ✅ API | — | — | 需管理员安装 Bot；免费版限 90 天 |
-| 微信聊天记录 | ✅ SQLite | — | — | 目前测试下来不太稳定，推荐先用下方开源工具代替 |
+| 微信聊天记录 | ✅ SQLite | — | — | 推荐先导出再导入 |
 | PDF | — | ✅ | — | 手动上传 |
 | 图片 / 截图 | ✅ | — | — | 手动上传 |
 | 飞书 JSON 导出 | ✅ | ✅ | — | 手动上传 |
@@ -62,7 +61,7 @@
 
 ### 推荐的微信聊天记录导出工具
 
-以下工具为独立的开源项目，本项目不包含它们的代码，仅在解析器中适配了它们的导出格式。目前微信自动解密测试下来不太稳定，可以先用这些开源工具导出聊天记录，再粘贴或导入到本项目中使用：
+以下工具为独立开源项目，本项目不包含其代码，仅适配其导出格式：
 
 | 工具 | 平台 | 说明 |
 |------|------|------|
@@ -70,29 +69,27 @@
 | [PyWxDump](https://github.com/xaoyaoo/PyWxDump) | Windows | 微信数据库解密导出 |
 | [留痕](https://github.com/greyovo/留痕) | macOS | 微信聊天记录导出（Mac 用户推荐） |
 
-> 工具信息来自 [@therealXiaomanChu](https://github.com/therealXiaomanChu)，感谢各位开源作者，一起助力赛博永生！
-
 ---
 
 ## 安装
 
 ### Claude Code
 
-> **重要**：Claude Code 从 **git 仓库根目录** 的 `.claude/skills/` 查找 skill。请在正确的位置执行。
+> **重要**：Claude Code 从 **git 仓库根目录** 的 `.claude/skills/` 查找 skill。请在正确位置执行。
 
 ```bash
 # 安装到当前项目（在 git 仓库根目录执行）
 mkdir -p .claude/skills
-git clone https://github.com/however-yir/bestie-skill .claude/skills/create-bestie
+git clone https://github.com/however-yir/digital-self-skill .claude/skills/create-digital-self
 
 # 或安装到全局（所有项目都能用）
-git clone https://github.com/however-yir/bestie-skill ~/.claude/skills/create-bestie
+git clone https://github.com/however-yir/digital-self-skill ~/.claude/skills/create-digital-self
 ```
 
 ### OpenClaw
 
 ```bash
-git clone https://github.com/however-yir/bestie-skill ~/.openclaw/workspace/skills/create-bestie
+git clone https://github.com/however-yir/digital-self-skill ~/.openclaw/workspace/skills/create-digital-self
 ```
 
 ### 依赖（可选）
@@ -110,46 +107,50 @@ pip3 install -r requirements.txt
 在 Claude Code 中输入：
 
 ```
-/create-bestie
+/create-digital-self
 ```
 
-按提示输入闺蜜姓名、公司职级（如 `字节 2-1 算法工程师`）、性格标签，然后选择数据来源。所有字段均可跳过，仅凭描述也能生成。
+按提示输入你的身份背景（如 `字节 2-1 后端工程师`）、性格标签、决策偏好，然后选择数据来源。字段都可跳过，仅凭描述也能生成基础版本。
 
-完成后用 `/{slug}` 调用该闺蜜 Skill。
+完成后用 `/{slug}` 调用你的分身 Skill。
 
 ### 管理命令
 
 | 命令 | 说明 |
 |------|------|
-| `/list-besties` | 列出所有闺蜜 Skill |
+| `/list-digital-selves` | 列出所有分身 Skill |
 | `/{slug}` | 调用完整 Skill（Persona + Work） |
 | `/{slug}-work` | 仅工作能力 |
-| `/{slug}-persona` | 仅人物性格 |
-| `/bestie-rollback {slug} {version}` | 回滚到历史版本 |
-| `/delete-bestie {slug}` | 删除 |
+| `/{slug}-persona` | 仅人格与表达 |
+| `/digital-self-rollback {slug} {version}` | 回滚到历史版本 |
+| `/delete-digital-self {slug}` | 删除 |
 
 ---
 
 ## 效果示例
 
-> 输入：`字节 2-1 后端工程师，INTJ，甩锅高手，字节范`
+> 输入：`互联网后端工程师，INTJ，重视边界，结果导向，表达直接`
 
-**场景一：Code Review**
-
-```
-用户      ❯ 帮我看一下这个接口设计
-
-闺蜜.skill ❯ 等等，这个接口的 impact 是什么？背景没说清楚。
-             （看完后）N+1 查询，改掉。返回结构用统一的
-             {code, message, data}，这是规范，不用问为什么。
-```
-
-**场景二：甩锅**
+**场景一：架构评审**
 
 ```
-用户      ❯ 这个 bug 是你引入的吧
+用户      ❯ 帮我看下这个接口设计
 
-闺蜜.skill ❯ 上线时间对上了吗？那个需求改了好几个地方，还有其他变更。
+分身.skill ❯ 先补齐目标和约束：吞吐量、延迟预算、失败重试策略。
+             再看实现：这里会出现 N+1 查询，建议改批量读取。
+             返回结构统一成 {code, message, data}，否则后续客户端要到处兼容。
+```
+
+**场景二：任务拆解**
+
+```
+用户      ❯ 这个需求今天能上线吗
+
+分身.skill ❯ 能做灰度，但不能直接全量。先切三步：
+             1) 开关 + 监控埋点
+             2) 小流量验证
+             3) 次日放量
+             这样你不会在晚上被告警叫醒。
 ```
 
 ---
@@ -158,28 +159,28 @@ pip3 install -r requirements.txt
 
 ### 生成的 Skill 结构
 
-每个闺蜜 Skill 由两部分组成，共同驱动输出：
+每个分身 Skill 由两部分组成：
 
 | 部分 | 内容 |
 |------|------|
-| **Part A — Work Skill** | 负责系统、技术规范、工作流程、经验知识库 |
-| **Part B — Persona** | 5 层性格结构：硬规则 → 身份 → 表达风格 → 决策模式 → 人际行为 |
+| **Part A — Work Skill** | 系统设计偏好、技术规范、流程习惯、经验知识库 |
+| **Part B — Persona** | 5 层人格结构：硬规则 → 身份 → 表达风格 → 决策模式 → 人际行为 |
 
-运行逻辑：`接到任务 → Persona 判断态度 → Work Skill 执行 → 用他的语气输出`
+运行逻辑：`接到任务 → Persona 判断取向 → Work Skill 执行 → 用你的语气输出`
 
 ### 支持的标签
 
-**个性**：认真负责 · 甩锅高手 · 完美主义 · 差不多就行 · 拖延症 · PUA 高手 · 职场政治玩家 · 向上管理专家 · 阴阳怪气 · 反复横跳 · 话少 · 只读不回 …
+**个性**：认真负责 · 结果导向 · 完美主义 · 快速试错 · 追求稳定 · 直接表达 · 谨慎保守 · 关注风险 · 擅长推进 · 强执行
 
-**企业文化**：字节范 · 阿里味 · 腾讯味 · 华为味 · 百度味 · 美团味 · 第一性原理 · OKR 狂热者 · 大厂流水线 · 创业公司派
+**工作文化**：字节范 · 阿里味 · 腾讯味 · 华为味 · 百度味 · 美团味 · 第一性原理 · OKR 驱动 · 创业模式 · 平台化思维
 
-**职级支持**：字节 2-1~3-3+ · 阿里 P5~P11 · 腾讯 T1~T4 · 百度 T5~T9 · 美团 P4~P8 · 华为 13~21 级 · 网易 · 京东 · 小米 …
+**职级支持**：字节 2-1~3-3+ · 阿里 P5~P11 · 腾讯 T1~T4 · 百度 T5~T9 · 美团 P4~P8 · 华为 13~21 级 · 网易 · 京东 · 小米
 
 ### 进化机制
 
-- **追加文件** → 自动分析增量 → merge 进对应部分，不覆盖已有结论
-- **对话纠正** → 说「他不会这样，他应该是 xxx」→ 写入 Correction 层，立即生效
-- **版本管理** → 每次更新自动存档，支持回滚到任意历史版本
+- **追加材料** → 自动分析增量 → merge 到对应能力层，不覆盖既有结论
+- **对话纠正** → 你说「我不会这样，我更可能 xxx」→ 写入 Correction 层并即时生效
+- **版本管理** → 每次更新自动存档，支持回滚任意历史版本
 
 ---
 
@@ -188,26 +189,26 @@ pip3 install -r requirements.txt
 本项目遵循 [AgentSkills](https://agentskills.io) 开放标准，整个 repo 就是一个 skill 目录：
 
 ```
-create-bestie/
+create-digital-self/
 ├── SKILL.md              # skill 入口（官方 frontmatter）
 ├── prompts/              # Prompt 模板
 │   ├── intake.md         #   对话式信息录入
 │   ├── work_analyzer.md  #   工作能力提取
-│   ├── persona_analyzer.md #  性格行为提取（含标签翻译表）
+│   ├── persona_analyzer.md #  人格行为提取
 │   ├── work_builder.md   #   work.md 生成模板
 │   ├── persona_builder.md #   persona.md 五层结构模板
 │   ├── merger.md         #   增量 merge 逻辑
 │   └── correction_handler.md # 对话纠正处理
 ├── tools/                # Python 工具
-│   ├── feishu_auto_collector.py  # 飞书全自动采集
-│   ├── feishu_browser.py         # 飞书浏览器方案
-│   ├── feishu_mcp_client.py      # 飞书 MCP 方案
+│   ├── feishu_auto_collector.py   # 飞书全自动采集
+│   ├── feishu_browser.py          # 飞书浏览器方案
+│   ├── feishu_mcp_client.py       # 飞书 MCP 方案
 │   ├── dingtalk_auto_collector.py # 钉钉全自动采集
-│   ├── slack_auto_collector.py   # Slack 全自动采集
-│   ├── email_parser.py           # 邮件解析
-│   ├── skill_writer.py           # Skill 文件管理
-│   └── version_manager.py        # 版本存档与回滚
-├── besties/           # 生成的闺蜜 Skill（gitignored）
+│   ├── slack_auto_collector.py    # Slack 全自动采集
+│   ├── email_parser.py            # 邮件解析
+│   ├── skill_writer.py            # Skill 文件管理
+│   └── version_manager.py         # 版本存档与回滚
+├── selves/             # 生成的分身 Skill（gitignored）
 ├── docs/PRD.md
 ├── requirements.txt
 └── LICENSE
@@ -217,20 +218,20 @@ create-bestie/
 
 ## 注意事项
 
-- **原材料质量决定 Skill 质量**：聊天记录 + 长文档 > 仅手动描述
-- 建议优先收集：他**主动写的**长文 > **决策类回复** > 日常消息
-- 飞书自动采集需将 App bot 加入相关群聊
-- 目前还是一个demo版本，如果有bug请多多提issue！
+- **原材料质量决定分身质量**：真实聊天 + 长文档 > 仅手动描述
+- 建议优先收集：你**主动写的**长文 > **决策类回复** > 高频协作对话
+- 自动采集前先确认合规边界，避免导入敏感数据
+- 当前仍是 demo 版本，欢迎提 issue 一起迭代
 
 ---
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=however-yir%2Fbestie-skill&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=however-yir%2Fdigital-self-skill&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=however-yir/bestie-skill&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=however-yir/bestie-skill&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=however-yir/bestie-skill&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=however-yir/digital-self-skill&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=however-yir/digital-self-skill&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=however-yir/digital-self-skill&type=date&legend=top-left" />
  </picture>
 </a>
 
@@ -238,7 +239,7 @@ create-bestie/
 
 <div align="center">
 
-MIT License © [titanwings](https://github.com/titanwings)
+MIT License © [however-yir](https://github.com/however-yir)
 
 
 </div>
