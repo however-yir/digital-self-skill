@@ -2,6 +2,12 @@
 
 # 分身.skill
 
+> **非官方声明（Non-Affiliation）**  
+> 本仓库为社区维护的衍生/二次开发版本，与上游项目及其权利主体不存在官方关联、授权背书或从属关系。  
+> **商标声明（Trademark Notice）**  
+> 相关项目名称、Logo 与商标归其各自权利人所有。本仓库仅用于说明兼容/来源，不主张任何商标权利。
+
+
 > *"把你蒸馏成可调用的数字生命，让关键判断不再只存在于你的脑子里。"*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
