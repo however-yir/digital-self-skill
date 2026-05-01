@@ -6,7 +6,7 @@ pytest>=8.0.0
 pypinyin>=0.55.0
 
 # Optional: Playwright for Feishu browser login / DingTalk message scraping
-playwright>=1.40.0
+playwright>=1.58.0
 
 # Optional: Slack auto collector
 slack-sdk>=3.27.0
